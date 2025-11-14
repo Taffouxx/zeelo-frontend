@@ -42,15 +42,14 @@ export default class ServerConfig
         const client = new Client({
             unreads: true,
             autoReconnect: true,
-            apiURL: import.meta.env.VITE_API_URL,
             debug: isDebug(),
             onPongTimeout: "RECONNECT",
         });
-
+    
         if (this.config !== null) {
             client.configuration = this.config;
         }
-
+    
         return client;
     }
 

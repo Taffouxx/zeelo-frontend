@@ -38,13 +38,13 @@ class ClientController {
 
     constructor() {
         this.apiClient = new Client({
-            apiURL: import.meta.env.VITE_API_URL,
+            apiURL: "http://local.stoat.chat/api",
         });
-
-        // ! FIXME: loop until success infinitely
+    
         this.apiClient
             .fetchConfiguration()
             .then(() => (this.configuration = this.apiClient.configuration!));
+            console.log("Zeelo API URL =", "http://local.stoat.chat/api");
 
         this.configuration = null;
         this.sessions = new ObservableMap();
