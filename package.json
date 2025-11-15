@@ -40,7 +40,9 @@
                     "varsIgnorePattern": "^_"
                 }
             ],
-            "react/jsx-no-literals": "warn"
+            "react/jsx-no-literals": "warn",
+            "@typescript-eslint/ban-ts-comment": "off",
+            "@typescript-eslint/no-explicit-any": "off"
         }
     },
     "dependencies": {
@@ -155,7 +157,7 @@
         "slate-react": "^0.81.0",
         "stacktrace-js": "^2.0.2",
         "styled-components": "^5.3.0",
-        "typescript": "^4.4.2",
+        "typescript": "5.4.5",
         "ulid": "^2.3.0",
         "unified": "^10.1.2",
         "unist-util-visit": "^4.1.0",

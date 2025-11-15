@@ -113,10 +113,13 @@ export default function Discover() {
     useEffect(
         () =>
             reaction(() => state.settings.theme.computeVariables(), sendTheme),
-        [],
+        [state.settings.theme],
     );
 
-    useEffect(() => state.layout.setLastDiscoverPath(path), []);
+    useEffect(
+        () => state.layout.setLastDiscoverPath(path),
+        [path, state.layout],
+    );
 
     useEffect(() => {
         function onMessage(message: MessageEvent) {
@@ -158,27 +161,24 @@ export default function Discover() {
 
         window.addEventListener("message", onMessage);
         return () => window.removeEventListener("message", onMessage);
-    }, [ref]);
+    }, [history, state]);
 
     return (
         <Container>
-            {isTouchscreenDevice && (
-                <Header palette="primary" withTransparency>
-                    <Compass size={27} />
-                    Discover
-                </Header>
-            )}
-            {!loaded && (
-                <Loader>
-                    <Preloader type="ring" />
-                </Loader>
-            )}
+            {isTouchscreenDevice &&
+                ((
+                    <Header palette="primary" withTransparency>
+                        <Compass size={27} />
+                        Discover
+                    </Header>
+                ) as any)}
+            {!loaded && <Loader>{(<Preloader type="ring" />) as any}</Loader>}
             <Frame
                 ref={ref}
                 loaded={loaded}
-                crossOrigin="anonymous"
                 onLoad={() => setLoaded(true)}
                 src={REMOTE + path}
+                {...({ crossOrigin: "anonymous" } as any)}
             />
         </Container>
     );

@@ -44,7 +44,13 @@ function getVersion() {
 
 export default defineConfig({
     plugins: [
-        preact(),
+        preact({
+            babel: {
+                plugins: [
+                    ["@babel/plugin-proposal-decorators", { legacy: true }],
+                ],
+            },
+        }),
         macrosPlugin(),
         legacy({
             targets: ["defaults", "not IE 11"],
@@ -127,5 +133,10 @@ export default defineConfig({
     },
     resolve: {
         preserveSymlinks: true,
+        alias: {
+            react: "preact/compat",
+            "react-dom": "preact/compat",
+            "react/jsx-runtime": "preact/jsx-runtime",
+        },
     },
 });

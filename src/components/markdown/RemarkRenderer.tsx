@@ -9,7 +9,7 @@ import remarkRehype from "remark-rehype";
 import styled, { css } from "styled-components";
 import { unified } from "unified";
 
-import { createElement } from "preact";
+import { createElement, Fragment } from "preact";
 import { memo } from "preact/compat";
 import { useLayoutEffect, useMemo, useState } from "preact/hooks";
 

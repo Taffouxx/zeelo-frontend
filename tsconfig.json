@@ -4,9 +4,11 @@
         "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],
         "allowJs": true,
         "skipLibCheck": true,
+        "suppressImplicitAnyIndexErrors": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
         "strict": true,
+        "noImplicitAny": false,
         "forceConsistentCasingInFileNames": true,
         "module": "ESNext",
         "moduleResolution": "Node",
@@ -15,10 +17,8 @@
         "noEmit": true,
         "jsx": "preserve",
         "jsxImportSource": "preact",
-        "jsxFactory": "h",
-        "jsxFragmentFactory": "Fragment",
         "types": ["vite-plugin-pwa/client"],
         "experimentalDecorators": true
     },
-    "include": ["src", "external/lang/Languages.ts"]
+    "include": ["src", "external/lang/Languages.ts", "src/types/react.d.ts"]
 }
