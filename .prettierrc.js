@@ -1,7 +1,13 @@
 module.exports = {
     tabWidth: 4,
+    useTabs: false,
+    semi: true,
+    singleQuote: false,
     trailingComma: "all",
-    jsxBracketSameLine: true,
+    printWidth: 100,
+    bracketSpacing: true,
+    arrowParens: "always",
+    endOfLine: "lf",
     importOrder: [
         "preact|classnames|.scss$",
         "^@revoltchat",
@@ -13,4 +19,5 @@ module.exports = {
         "^[./]",
     ],
     importOrderSeparation: true,
+    plugins: ["@trivago/prettier-plugin-sort-imports"],
 };

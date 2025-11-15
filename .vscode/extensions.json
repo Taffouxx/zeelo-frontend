@@ -1,7 +1,8 @@
 {
     "recommendations": [
-        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "kol.commit-lint"
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig",
+        "bradlc.vscode-tailwindcss"
     ]
 }
