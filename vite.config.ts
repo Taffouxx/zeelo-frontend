@@ -6,19 +6,17 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
+// ВАЖНО: обычный импорт, без /dist/index.mjs
 import preact from "@preact/preset-vite";
 
 function getGitRevision() {
     try {
         const rev = readFileSync(".git/HEAD").toString().trim();
-        if (rev.indexOf(":") === -1) {
-            return rev;
-        }
-
+        if (rev.indexOf(":") === -1) return rev;
         return readFileSync(`.git/${rev.substring(5)}`)
             .toString()
             .trim();
-    } catch (err) {
+    } catch {
         console.error("Failed to get Git revision.");
         return "?";
     }
@@ -27,34 +25,25 @@ function getGitRevision() {
 function getGitBranch() {
     try {
         const rev = readFileSync(".git/HEAD").toString().trim();
-        if (rev.indexOf(":") === -1) {
-            return "DETACHED";
-        }
-
-        return rev.split("/").pop();
-    } catch (err) {
+        if (rev.indexOf(":") === -1) return "DETACHED";
+        return rev.split("/").pop()!;
+    } catch {
         console.error("Failed to get Git branch.");
         return "?";
     }
 }
 
 function getVersion() {
-    return JSON.parse(readFileSync("package.json").toString()).version;
+    return JSON.parse(readFileSync("package.json").toString()).version as string;
 }
 
 export default defineConfig({
     plugins: [
         preact({
-            babel: {
-                plugins: [
-                    ["@babel/plugin-proposal-decorators", { legacy: true }],
-                ],
-            },
+            babel: { plugins: [["@babel/plugin-proposal-decorators", { legacy: true }]] },
         }),
         macrosPlugin(),
-        legacy({
-            targets: ["defaults", "not IE 11"],
-        }),
+        legacy({ targets: ["defaults", "not IE 11"] }),
         VitePWA({
             srcDir: "src",
             filename: "sw.ts",
@@ -66,7 +55,6 @@ export default defineConfig({
                 categories: ["communication", "chat", "messaging"],
                 start_url: "/",
                 orientation: "portrait",
-                /*display_override: ["window-controls-overlay"],*/
                 display: "standalone",
                 background_color: "#101823",
                 theme_color: "#101823",
@@ -94,23 +82,6 @@ export default defineConfig({
                         purpose: "maskable",
                     },
                 ],
-                //TODO: add shortcuts relating to your last opened direct messages
-                /*shortcuts: [
-                    {
-                      "name": "Open Play Later",
-                      "short_name": "Play Later",
-                      "description": "View the list of podcasts you saved for later",
-                      "url": "/play-later?utm_source=homescreen",
-                      "icons": [{ "src": "/icons/play-later.png", "sizes": "192x192" }]
-                    },
-                    {
-                      "name": "View Subscriptions",
-                      "short_name": "Subscriptions",
-                      "description": "View the list of podcasts you listen to",
-                      "url": "/subscriptions?utm_source=homescreen",
-                      "icons": [{ "src": "/icons/subscriptions.png", "sizes": "192x192" }]
-                    }
-                  ]*/
             },
         }),
         replace({
@@ -118,15 +89,11 @@ export default defineConfig({
             __GIT_BRANCH__: getGitBranch(),
             __APP_VERSION__: getVersion(),
             preventAssignment: true,
-        }) as any,
+        }) as unknown as import("rollup").Plugin,
     ],
     build: {
         sourcemap: true,
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, "index.html"),
-            },
-        },
+        rollupOptions: { input: { main: resolve(__dirname, "index.html") } },
     },
     optimizeDeps: {
         exclude: ["revolt.js", "preact-context-menu", "@revoltchat/ui"],
@@ -137,6 +104,8 @@ export default defineConfig({
             react: "preact/compat",
             "react-dom": "preact/compat",
             "react/jsx-runtime": "preact/jsx-runtime",
+            // КЛЮЧЕВОЕ: подменяем проблемный плагин на no-op
+            "vite-prerender-plugin": resolve(__dirname, "shims/vite-prerender-plugin.cjs"),
         },
     },
 });

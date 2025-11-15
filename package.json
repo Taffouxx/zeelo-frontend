@@ -19,6 +19,7 @@
         "start:inject": "node scripts/inject.js && sirv dist_injected --cors --single --host"
     },
     "dependencies": {
+        "@preact/preset-vite": "2.5.0",
         "@revoltchat/rehype-katex": "6.0.3-patch.1",
         "fs-extra": "^10.0.0",
         "klaw": "^3.0.0",
@@ -52,7 +53,6 @@
         "@fontsource/ubuntu-mono": "^4.4.5",
         "@hcaptcha/react-hcaptcha": "^1.4.4",
         "@insertish/vite-plugin-babel-macros": "^1.0.5",
-        "@preact/preset-vite": "^2.0.0",
         "@revoltchat/ui": "^1.0.77",
         "@rollup/plugin-replace": "^2.4.2",
         "@styled-icons/boxicons-logos": "^10.38.0",
@@ -88,10 +88,10 @@
         "eslint-plugin-jsdoc": "^39.3.2",
         "eslint-plugin-mobx": "^0.0.8",
         "eventemitter3": "^4.0.7",
-        "husky": "^8.0.3",
-        "lint-staged": "^15.2.0",
         "history": "4",
+        "husky": "^8.0.3",
         "json-stringify-deterministic": "^1.0.2",
+        "lint-staged": "^15.2.0",
         "localforage": "^1.9.0",
         "lodash": "^4.17.21",
         "lodash.defaultsdeep": "^4.6.1",
@@ -138,6 +138,7 @@
         "unist-util-visit": "^4.1.0",
         "use-resize-observer": "^7.0.0",
         "vite-plugin-pwa": "^0.12.3",
+        "vite-prerender-plugin": "portal:./shims/vite-prerender-plugin",
         "workbox-precaching": "^6.1.5"
     },
     "name": "client",
