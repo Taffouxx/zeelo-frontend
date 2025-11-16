@@ -4,7 +4,6 @@ import { useEffect, useState } from "preact/hooks";
 
 import { Button } from "@revoltchat/ui";
 
-import PaintCounter from "../../lib/PaintCounter";
 import { TextReact } from "../../lib/i18n";
 
 import { PageHeader } from "../../components/ui/Header";
@@ -30,9 +29,7 @@ export default function Developer() {
     return (
         <div>
             <PageHeader icon={<Wrench size="24" />}>Developer Tab</PageHeader>
-            <div style={{ padding: "16px" }}>
-                <PaintCounter always />
-            </div>
+            <div style={{ padding: "16px" }}></div>
             <div style={{ padding: "16px" }}>
                 <b>Server Ping:</b> {ping ?? "?"}ms
                 <br />

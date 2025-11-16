@@ -1,13 +1,9 @@
-// @ts-nocheck - Preact/React type incompatibility (Element vs ReactNode)
-import { Money } from "@styled-icons/boxicons-regular";
 import {
     Home as HomeIcon,
     PlusCircle,
     Compass,
     Megaphone,
-    Group,
     Cog,
-    RightArrowCircle,
 } from "@styled-icons/boxicons-solid";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -27,7 +23,6 @@ import { useApplicationState } from "../../mobx/State";
 import wideSVG from "/assets/wide.svg";
 
 import { PageHeader } from "../../components/ui/Header";
-import { useClient } from "../../controllers/client/ClientController";
 import { modalController } from "../../controllers/modals/ModalController";
 
 const Overlay = styled.div`
@@ -44,7 +39,6 @@ const Overlay = styled.div`
 `;
 
 const HomeComponent = () => {
-    const client = useClient();
     const state = useApplicationState();
 
     const seasonalTheme = state.settings.get("appearance:seasonal", true);
@@ -127,43 +121,15 @@ const HomeComponent = () => {
                                 </CategoryButton>
                             </a>
                             <Link to="/discover">
-                                <a>
-                                    <CategoryButton
-                                        action="chevron"
-                                        icon={<Compass size={32} />}
-                                        description={
-                                            <Text id="app.home.discover_desc" />
-                                        }>
-                                        <Text id="app.home.discover" />
-                                    </CategoryButton>
-                                </a>
+                                <CategoryButton
+                                    action="chevron"
+                                    icon={<Compass size={32} />}
+                                    description={
+                                        <Text id="app.home.discover_desc" />
+                                    }>
+                                    <Text id="app.home.discover" />
+                                </CategoryButton>
                             </Link>
-
-                            {client.servers.get(
-                                "01F7ZSBSFHQ8TA81725KQCSDDP",
-                            ) ? (
-                                <Link to="/server/01F7ZSBSFHQ8TA81725KQCSDDP">
-                                    <CategoryButton
-                                        action="chevron"
-                                        icon={<RightArrowCircle size={32} />}
-                                        description={
-                                            <Text id="app.home.goto-testers_desc" />
-                                        }>
-                                        <Text id="app.home.goto-testers" />
-                                    </CategoryButton>
-                                </Link>
-                            ) : (
-                                <Link to="/invite/Testers">
-                                    <CategoryButton
-                                        action="chevron"
-                                        icon={<Group size={32} />}
-                                        description={
-                                            <Text id="app.home.join-testers_desc" />
-                                        }>
-                                        <Text id="app.home.join-testers" />
-                                    </CategoryButton>
-                                </Link>
-                            )}
 
                             <Link to="/settings/feedback">
                                 <CategoryButton
@@ -175,19 +141,7 @@ const HomeComponent = () => {
                                     <Text id="app.home.feedback" />
                                 </CategoryButton>
                             </Link>
-                            <a
-                                href="https://wiki.revolt.chat/notes/project/financial-support/"
-                                target="_blank"
-                                rel="noreferrer">
-                                <CategoryButton
-                                    action="external"
-                                    description={
-                                        <Text id="app.home.donate_desc" />
-                                    }
-                                    icon={<Money size={32} />}>
-                                    <Text id="app.home.donate" />
-                                </CategoryButton>
-                            </a>
+
                             <Link to="/settings">
                                 <CategoryButton
                                     action="chevron"

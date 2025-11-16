@@ -17,6 +17,7 @@ enum Badges {
     EarlyAdopter = 256,
     ReservedRelevantJokeBadge1 = 512,
     ReservedRelevantJokeBadge2 = 1024,
+    Partner = 2048,
 }
 
 const BadgesBase = styled.div`
@@ -61,18 +62,7 @@ export default function UserBadges({ badges, uid }: Props) {
                         content={
                             <Text id="app.special.popovers.user_profile.badges.translator" />
                         }>
-                        <img
-                            src="/assets/badges/translator.svg"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {
-                                window.open(
-                                    "https://weblate.insrt.uk/projects/revolt/web-app/",
-                                    "_blank",
-                                );
-                            }}
-                        />
+                        <img src="/assets/badges/translator.svg" />
                     </Tooltip>
                 ) : (
                     <></>
@@ -87,6 +77,16 @@ export default function UserBadges({ badges, uid }: Props) {
                 ) : (
                     <></>
                 )}
+                {badges & Badges.Supporter ? (
+                    <Tooltip
+                        content={
+                            <Text id="app.special.popovers.user_profile.badges.supporter" />
+                        }>
+                        <img src="/assets/badges/supporter.svg" />
+                    </Tooltip>
+                ) : (
+                    <></>
+                )}
                 {badges & Badges.PlatformModeration ? (
                     <Tooltip
                         content={
@@ -97,33 +97,22 @@ export default function UserBadges({ badges, uid }: Props) {
                 ) : (
                     <></>
                 )}
+                {badges & Badges.Partner ? (
+                    <Tooltip
+                        content={
+                            <Text id="app.special.popovers.user_profile.badges.partner" />
+                        }>
+                        <img src="/assets/badges/partner.svg" />
+                    </Tooltip>
+                ) : (
+                    <></>
+                )}
                 {badges & Badges.ResponsibleDisclosure ? (
                     <Tooltip
                         content={
                             <Text id="app.special.popovers.user_profile.badges.responsible_disclosure" />
                         }>
                         <Shield size={24} color="gray" />
-                    </Tooltip>
-                ) : (
-                    <></>
-                )}
-                {badges & Badges.Supporter ? (
-                    <Tooltip
-                        content={
-                            <Text id="app.special.popovers.user_profile.badges.supporter" />
-                        }>
-                        <img
-                            src="/assets/badges/supporter.svg"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {
-                                window.open(
-                                    "https://wiki.revolt.chat/notes/project/financial-support/",
-                                    "_blank",
-                                );
-                            }}
-                        />
                     </Tooltip>
                 ) : (
                     <></>
@@ -149,7 +138,7 @@ export default function UserBadges({ badges, uid }: Props) {
                 ) : (
                     <></>
                 )}
-                {uid === "01EX2NCWQ0CHS3QJF0FEQS1GR4" ? (
+                {uid === "01KA21H92X0BP8XQDRK907E3V4" ? (
                     <Tooltip content="🦝">
                         <img src="/assets/badges/raccoon.svg" />
                     </Tooltip>
